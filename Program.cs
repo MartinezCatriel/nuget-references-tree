@@ -17,10 +17,13 @@ namespace NugetReferences
                 Console.Write("Enter the dependency id matching criteria: ");
                 var criteria = Console.ReadLine();
 
+                Console.Write("Enter the maximum depth for the dependency tree: ");
+                var maxDepth = int.Parse(Console.ReadLine());
+
                 var repo = new LocalPackageRepository(repoFolder);
                 IQueryable<IPackage> packages = repo.GetPackages().Where(p => p.Id.Contains(criteria));
 
-                OutputGraph(repo, packages, 0, 1);
+                OutputGraph(repo, packages, 0, maxDepth);
 
                 Console.ReadKey();
             }
